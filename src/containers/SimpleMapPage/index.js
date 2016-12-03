@@ -9,7 +9,7 @@ import styles from './styles.scss';
 
 export default class SimpleMapPage extends Component {
   static defaultProps = {
-    center: { lat: 59.938043, lng: 30.337157 },
+    center: { lat: 41.6032, lng: -73.0877 },
     zoom: 9,
     greatPlaceCoords: { lat: 59.724465, lng: 30.080121 },
   };
