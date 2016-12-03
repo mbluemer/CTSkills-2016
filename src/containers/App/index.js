@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import classNames from 'classnames';
 import Modal from 'react-modal';
+import axios from 'axios';
 import SearchBar from './SearchBar';
 import SimpleMapPage from '../SimpleMapPage';
 
@@ -24,7 +25,15 @@ export default class App extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
+  testAPI() {
+    console.log('MAKING API REQUEST TO: ttps://data.ct.gov/resource/w3da-nijq.json');
+    axios.get('https://data.ct.gov/resource/w3da-nijq.json')
+    .then(response => console.log(response));
+    this.state = this.state;
+  }
+
   render() {
+    this.testAPI();
     return (
       <div>
         <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
