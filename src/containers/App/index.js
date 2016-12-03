@@ -1,21 +1,44 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import classNames from 'classnames';
+import Modal from 'react-modal';
 import SearchBar from './SearchBar';
+
 
 import '../../theme/normalize.css';
 import styles from './styles.scss';
 
-const App = () => (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <div className={classNames(styles.App, 'container')}>
-      <SearchBar />
-    </div>
-  </MuiThemeProvider>
-);
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { modalIsOpen: false };
+  }
 
-App.propTypes = { children: PropTypes.node };
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
 
-export default App;
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <div className={classNames(styles.App, 'container')}>
+          <SearchBar onSearch={() => this.openModal()} />
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={() => this.closeModal()}
+            contentLabel="Example Modal"
+          >
+            <h1>Modal Content</h1>
+            <p>Etc.</p>
+          </Modal>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
