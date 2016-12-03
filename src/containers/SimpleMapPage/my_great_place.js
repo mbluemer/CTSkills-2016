@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import styles from './styles.scss';
 
 export default class MyGreatPlace extends Component {
   static propTypes = {
@@ -13,8 +12,20 @@ export default class MyGreatPlace extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
+    const styling = {
+      position: 'absolute',
+      width: 22,
+      height: 22,
+      background: '#f44336',
+      border: '5px solid #f44336',
+      'border-radius': 40,
+      'text-align': 'center',
+      'font-size': 12,
+      left: -40 / 2,
+      top: -40 / 2,
+    };
     return (
-      <div className={styles.MyGreatPlace}>
+      <div style={styling}>
         {this.props.text}
       </div>
     );

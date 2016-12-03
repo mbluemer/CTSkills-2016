@@ -47,9 +47,9 @@ export default class App extends React.Component {
               <h1>Modal Content</h1>
               <p>Etc.</p>
             </Modal>
+            <SimpleMapPage />
           </div>
         </MuiThemeProvider>
-        <SimpleMapPage />
       </div>
     );
   }
