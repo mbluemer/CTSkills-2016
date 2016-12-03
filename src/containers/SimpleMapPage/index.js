@@ -14,11 +14,14 @@ export default class SimpleMapPage extends Component {
     zoom: 9,
     greatPlaceCoords: { lat: 59.724465, lng: 30.080121 },
   };
-  /*
   constructor(props) {
     super(props);
+
+    this.state = {
+      data: null,
+      domPoints: null,
+    };
   }
-  */
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -27,21 +30,24 @@ export default class SimpleMapPage extends Component {
       margin: '4px',
     };
     /* eslint-disable */
-    var json_data = {};
-    var data = [];
     axios.get('https://data.ct.gov/resource/w3da-nijq.json')
       .then((response) => {
-        json_data = response.data;
-        // console.log(`response.data: ${response.data}`);
-        // console.log(`assigned data: ${json_data}`);
-      });
-    // console.log(`data: ${data}`);
-    for (var i in json_data) {
-      console.log(`${i}`);
-      data.push(json_data[i]);
-    }
-    console.log('Json data: ' + json_data);
-    console.log('Array from data: ' + data);
+        const json_data = response.data;
+        console.log(json_data);
+        const other = json_data.map(entity => {
+          if (entity.location_1.latitude && entity.location_1.longitude) {
+            return (
+              <MyGreatPlace
+                lat={entity.location_1.latitude}
+                lng={entity.location_1.longitude}
+                text={entity.name}
+              />
+            );
+          }
+        });
+        this.setState({ domPoints: other });
+      })
+      .catch(error => console.log(error));
     return (
       <div className="row" style={rowStyle}>
         <div className={classNames(styles.SimpleMapPage, 'col-lg-12')}>
@@ -49,15 +55,7 @@ export default class SimpleMapPage extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            <MyGreatPlace lat={59.955413} lng={30.337844} text={'A'} /* Kreyser Avrora */ />
-            <MyGreatPlace {...this.props.greatPlaceCoords} text={'B'} /* road circle */ />
-            {data.map(entity => (
-              <MyGreatPlace
-                lat={entity.location.latitude}
-                lng={entity.location.latitude}
-                text={entity.name}
-              />
-            ))}
+          {this.state.domPoints}
           </GoogleMap>
         </div>
       </div>
