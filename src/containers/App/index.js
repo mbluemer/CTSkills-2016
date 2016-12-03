@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import classNames from 'classnames';
 import SearchBar from './SearchBar';
+import SimpleMapPage from '../SimpleMapPage';
 
 import '../../theme/normalize.css';
 import styles from './styles.scss';
@@ -12,6 +13,7 @@ const App = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <div className={classNames(styles.App, 'container')}>
       <SearchBar />
+      <SimpleMapPage />
     </div>
   </MuiThemeProvider>
 );
