@@ -6,6 +6,7 @@ export default class MyGreatPlace extends Component {
   static propTypes = {
     text: PropTypes.string,
     onClick: PropTypes.func,
+    $hover: PropTypes.bool,
   };
 
   static defaultProps = {};
@@ -15,8 +16,8 @@ export default class MyGreatPlace extends Component {
   render() {
     const styling = {
       position: 'absolute',
-      width: 10,
-      height: 10,
+      width: 5,
+      height: 20,
       color: 'blue',
       background: '#f44336',
       border: '5px solid #f44336',
@@ -26,9 +27,11 @@ export default class MyGreatPlace extends Component {
       left: -40 / 2,
       top: -40 / 2,
     };
+
+    const text = this.props.$hover ? this.props.text : '';
     return (
       <button style={styling} onClick={() => this.props.onClick()}>
-        {this.props.text}
+        {text}
       </button>
     );
   }

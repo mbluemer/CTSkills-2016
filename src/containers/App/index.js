@@ -5,24 +5,26 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 import axios from 'axios';
+import JsonTable from 'react-json-table';
 import SearchBar from './SearchBar';
 import SimpleMapPage from '../SimpleMapPage';
-
 import '../../theme/normalize.css';
 import styles from './styles.scss';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { modalIsOpen: false, info: '' };
+    this.state = { modalIsOpen: false, info: '', location: '' };
   }
 
   openModal(text) {
-    this.setState({ modalIsOpen: true, info: text });
+    const data = text;
+    this.setState({ modalIsOpen: true, info: data, location: text.location_1 });
+    delete data.location_1;
   }
 
   closeModal() {
-    this.setState({ modalIsOpen: false, info: '' });
+    this.setState({ modalIsOpen: false, info: '', location: '' });
   }
 
   testAPI() {
@@ -49,7 +51,8 @@ export default class App extends React.Component {
               contentLabel="Example Modal"
             >
               <h1>Education Information for {this.state.info.name}</h1>
-              <p>{JSON.stringify(this.state.info)}</p>
+              <JsonTable rows={[this.state.info]} />
+              <JsonTable rows={[this.state.location]} />
             </Modal>
             <SimpleMapPage display={entity => this.display(entity)} />
           </div>
