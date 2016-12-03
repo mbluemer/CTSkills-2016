@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
+import classNames from 'classnames';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './my_great_place';
 
@@ -21,15 +22,20 @@ export default class SimpleMapPage extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
+    const rowStyle = {
+      margin: '4px',
+    };
     return (
-      <div className={styles.SimpleMapPage}>
-        <GoogleMap
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <MyGreatPlace lat={59.955413} lng={30.337844} text={'A'} /* Kreyser Avrora */ />
-          <MyGreatPlace {...this.props.greatPlaceCoords} text={'B'} /* road circle */ />
-        </GoogleMap>
+      <div className="row" style={rowStyle}>
+        <div className={classNames(styles.SimpleMapPage, 'col-lg-12')}>
+          <GoogleMap
+            defaultCenter={this.props.center}
+            defaultZoom={this.props.zoom}
+          >
+            <MyGreatPlace lat={59.955413} lng={30.337844} text={'A'} /* Kreyser Avrora */ />
+            <MyGreatPlace {...this.props.greatPlaceCoords} text={'B'} /* road circle */ />
+          </GoogleMap>
+        </div>
       </div>
     );
   }
