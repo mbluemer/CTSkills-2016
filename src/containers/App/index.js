@@ -14,15 +14,15 @@ import styles from './styles.scss';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { modalIsOpen: false };
+    this.state = { modalIsOpen: false, info: '' };
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
+  openModal(text) {
+    this.setState({ modalIsOpen: true, info: text });
   }
 
   closeModal() {
-    this.setState({ modalIsOpen: false });
+    this.setState({ modalIsOpen: false, info: '' });
   }
 
   testAPI() {
@@ -30,6 +30,10 @@ export default class App extends React.Component {
     axios.get('https://data.ct.gov/resource/w3da-nijq.json')
     .then(response => console.log(response));
     this.state = this.state;
+  }
+
+  display(entity) {
+    this.openModal(entity);
   }
 
   render() {
@@ -44,10 +48,10 @@ export default class App extends React.Component {
               onRequestClose={() => this.closeModal()}
               contentLabel="Example Modal"
             >
-              <h1>Modal Content</h1>
-              <p>Etc.</p>
+              <h1>Education Information for {this.state.info.name}</h1>
+              <p>{JSON.stringify(this.state.info)}</p>
             </Modal>
-            <SimpleMapPage />
+            <SimpleMapPage display={entity => this.display(entity)} />
           </div>
         </MuiThemeProvider>
       </div>

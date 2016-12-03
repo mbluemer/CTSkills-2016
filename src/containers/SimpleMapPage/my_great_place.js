@@ -5,6 +5,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 export default class MyGreatPlace extends Component {
   static propTypes = {
     text: PropTypes.string,
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {};
@@ -14,8 +15,9 @@ export default class MyGreatPlace extends Component {
   render() {
     const styling = {
       position: 'absolute',
-      width: 22,
-      height: 22,
+      width: 10,
+      height: 10,
+      color: 'blue',
       background: '#f44336',
       border: '5px solid #f44336',
       'border-radius': 40,
@@ -25,9 +27,9 @@ export default class MyGreatPlace extends Component {
       top: -40 / 2,
     };
     return (
-      <div style={styling}>
+      <button style={styling} onClick={() => this.props.onClick()}>
         {this.props.text}
-      </div>
+      </button>
     );
   }
 }

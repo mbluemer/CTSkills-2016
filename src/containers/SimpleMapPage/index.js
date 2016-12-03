@@ -40,6 +40,7 @@ export default class SimpleMapPage extends Component {
               <MyGreatPlace
                 lat={entity.location_1.latitude}
                 lng={entity.location_1.longitude}
+                onClick={() => this.props.display(entity)}
                 text={entity.name}
               />
             );
@@ -68,4 +69,5 @@ SimpleMapPage.propTypes = {
   center: PropTypes.object,
   zoom: PropTypes.number,
   greatPlaceCoords: PropTypes.object,
+  display: PropTypes.func,
 };
