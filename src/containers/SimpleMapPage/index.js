@@ -33,7 +33,6 @@ export default class SimpleMapPage extends Component {
     axios.get('https://data.ct.gov/resource/w3da-nijq.json')
       .then((response) => {
         const json_data = response.data;
-        console.log(json_data);
         const other = json_data.map(entity => {
           if (entity.location_1.latitude && entity.location_1.longitude) {
             return (
